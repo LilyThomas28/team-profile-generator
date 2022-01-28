@@ -9,6 +9,29 @@ const Manager = require("./lib/Manager");
 // Array for team and id
 const team = [];
 const id = [];
+
+// function to start questions
+function starter() {
+    // addTeam function
+    function addTeam() {
+      inquirer
+        .then((userChoice) => {
+          switch (userChoice.memberChoice) {
+            case 'Manager':
+              managerPrompt();
+              break;
+            case 'Engineer':
+              engineerPrompt();
+              break;
+            case 'Intern':
+              internPrompt();
+              break;
+            default:
+              html(); 
+          }
+        });
+    }
+}
 // Prompt for Engineer
 function managerPrompt() {
     inquirer
@@ -138,3 +161,6 @@ function engineerPromt() {
         addTeam();
     });
 }
+
+
+starter();
