@@ -1,11 +1,14 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const path = require('path');
 // Import Classes and !html!(make html)
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const src = require('./src/htmlTemplate');
+const dist_Dir = path.resolve(__dirname, 'dist');
+const Pathway = path.join(dist_Dir, 'newProfile.html');
  
 const team = [];
 
@@ -157,11 +160,8 @@ function start() {
             });
     }
 }
-
-
-
 //write html in dist folder
-fs.writeFileSync('./dist/html-profiles.html', src(team), "utf-8");
+fs.writeFileSync(Pathway, src(team), "utf-8");
 
 // call question function
 start();

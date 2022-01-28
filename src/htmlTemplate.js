@@ -21,7 +21,7 @@ module.exports = (team) => {
             </div>
         </main>
     </body>
-</html>`
+</html>`;
 };
 
 const createCards = (team) => {
@@ -29,70 +29,90 @@ const createCards = (team) => {
     return `
     <div class="card m-3 shadow" style="width: 300px">
             <div class="card-header bg-primary text-white">
-                <p class="h3">${results.name}</p>
-                <p class="h4 fas fa-mug-hot mr-1">Manager</p>
+                <p class="h3">${manager.getName()}</p>
+                <p class="h4 fas fa-mug-hot mr-1">${manager.getRole()}</p>
             </div>
             <div class="card-body bg-light">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span class="font-weight-bold">ID: ${resuts.id}</span>
+                    <span class="font-weight-bold">ID: ${manager.getId()}</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="font-weight-bold">Email: ${results.email}</span>
-                    <a href=""></a>
+                    <span class="font-weight-bold">Email: ${manager.getEmail()}</span>
                 </li>
                 <li class="list-group-item">
-                    <span class="font-weight-bold">Office: ${results.officeNumber}</span>
+                    <span class="font-weight-bold">Office: ${manager.officeNumber}</span>
                 </li>
             </ul>
             </div>
-        </div>`
-    }
+        </div>`;
+    };
     const internPrompt = (intern) => {
         return `
         <div class="card m-3 shadow" style="width: 300px">
             <div class="card-header bg-primary text-white">
-                <p class="h3">${results.name}</p>
-                <p class="h4 fas fa-user-graduate mr-1">Intern </p>
+                <p class="h3">${intern.getName()}</p>
+                <p class="h4 fas fa-user-graduate mr-1">${intern.getRole()}</p>
             </div>
             <div class="card-body bg-light">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <span class="font-weight-bold id">ID: $</span>
+                        <span class="font-weight-bold id">ID: ${intern.getId()}</span>
                     </li>
                     <li class="list-group-item">
-                        <span class="font-weight-bold">Email: ${results.email}</span>
-                        <a href=""></a>
+                        <span class="font-weight-bold">Email: ${intern.getEmail()}</span>
                     </li>
                     <li class="list-group-item">
-                        <span class="font-weight-bold">School: ${results.school}</span>
+                        <span class="font-weight-bold">School: ${intern.school}</span>
                     </li>
                 </ul>
             </div>
-        </div>`
-    }
+        </div>`;
+    };
     const engineerPrompt = (engineer) => {
         return `
         <div class="card m-3 shadow" style="width: 300px">
             <div class="card-header bg-primary text-white">
-                <p class="h3 name">${results.name}</p>
-                <p class="h4 fas fa-glasses mr-1">Engineer</p>
+                <p class="h3 name">${engineer.getName()}</p>
+                <p class="h4 fas fa-glasses mr-1">${engineer.getRole()}</p>
             </div>
             <div class="card-body bg-light">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <span class="font-weight-bold">ID: ${results.id}</span>
+                        <span class="font-weight-bold">ID: ${engineer.getId()}</span>
                     </li>
                     <li class="list-group-item">
-                        <span class="font-weight-bold">Email: ${results.email}</span>
-                        <a href=""></a>
+                        <span class="font-weight-bold">Email: ${engineer.getEmail()}</span>
                     </li>
                     <li class="list-group-item">
-                        <span class="font-weight-bold">GitHub: ${results.github}</span>
-                        <a href=""></a>
+                        <span class="font-weight-bold">GitHub: ${engineer.github}</span>
                     </li>
                </ul>
           </div>
-        </div>`
-    }
-}
+        </div>`;
+    };
+    const htmlArr = [];
+
+    htmlArr.push(
+        team
+        .filter((employee) => employee.getRole() === 'Manager')
+        .map((manager) => managerPrompt(manager))
+        .join('')
+    );
+
+    htmlArr.push(
+        team
+        .filter((employee) => employee.getRole() === 'Engineer')
+        .map((engineer) => engineerPrompt(engineer))
+        .join('')
+    );
+
+    htmlArr.push(
+        team
+        .filter((employee) => employee.getRole() === 'Intern')
+        .map((intern) => internPrompt(intern))
+        .join('')
+    );
+
+    return htmlArr.join('');
+};
