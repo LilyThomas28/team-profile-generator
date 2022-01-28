@@ -5,6 +5,7 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const src = require('./src/htmlTemplate');
  
 const team = [];
 
@@ -39,7 +40,6 @@ function start() {
                     choices: ["Add Engineer", "Add Intern", "Team Complete!"],
                     message: "What would you like to do next?",
                 },
-
             ])
             .then((results) => {
                 const manager = new Manager(
@@ -158,4 +158,10 @@ function start() {
     }
 }
 
+
+
+//write html in dist folder
+fs.writeFileSync('./dist/html-profiles.html', src(team), "utf-8");
+
+// call question function
 start();
