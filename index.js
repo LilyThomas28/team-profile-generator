@@ -6,9 +6,9 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-const src = require('./src/htmlTemplate');
-const dist_Dir = path.resolve(__dirname, 'dist');
-const Pathway = path.join(dist_Dir, 'newProfile.html');
+const src = require('./src/htmlTemplate.js');
+const dist_Dir = path.resolve(__dirname, "dist");
+const Pathway = path.join(dist_Dir, "./newProfile.html");
  
 const team = [];
 
@@ -58,7 +58,7 @@ function start() {
                 if (results.getRole === "Add Intern") {
                     internPrompt();
                 } else {
-                    return;
+                    generateHtml();
                 }
             });
     }
@@ -106,7 +106,7 @@ function start() {
                 if (results.getRole === "Add Intern") {
                     internPrompt();
                 } else {
-                    return;
+                    generateHtml();
                 }
             });
             
@@ -155,13 +155,14 @@ function start() {
                 if (results.getRole === "Add Intern") {
                     internPrompt();
                 } else {
-                    return;
+                    generateHtml();
                 }
             });
     }
 }
 //write html in dist folder
-fs.writeFileSync(Pathway, src(team), "utf-8");
-
+function generateHtml() {
+    fs.writeFileSync(Pathway, src(team), "utf-8");
+}
 // call question function
 start();

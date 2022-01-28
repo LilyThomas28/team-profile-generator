@@ -34,4 +34,4 @@ THEN I exit the application, and the HTML is generated
 
 ## Video Walkthrough
 
-![Video Walkthrough]()
+![Video Walkthrough](https://watch.screencastify.com/v/rSKzrrh5wVlHbZWJmE2I)

@@ -1,29 +1,3 @@
-module.exports = (team) => {
-    return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Team Profiles Generator</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header class="bg-danger py-4 mb-5">
-            <h1 class="text-center text-white">My Team</h1>
-        </header>
-        <main>
-            <div class="container">
-            <div class="row d-flex justify-content-center align-items-center">
-            ${createCards(team)}
-            </div>
-            </div>
-        </main>
-    </body>
-</html>`;
-};
-
 const createCards = (team) => {
     const managerPrompt = (manager) => {
     return `
@@ -95,24 +69,50 @@ const createCards = (team) => {
 
     htmlArr.push(
         team
-        .filter((employee) => employee.getRole() === 'Manager')
+        .filter((employee) => employee.getRole() === "Manager")
         .map((manager) => managerPrompt(manager))
-        .join('')
+        .join("")
     );
 
     htmlArr.push(
         team
-        .filter((employee) => employee.getRole() === 'Engineer')
+        .filter((employee) => employee.getRole() === "Engineer")
         .map((engineer) => engineerPrompt(engineer))
-        .join('')
+        .join("")
     );
 
     htmlArr.push(
         team
-        .filter((employee) => employee.getRole() === 'Intern')
+        .filter((employee) => employee.getRole() === "Intern")
         .map((intern) => internPrompt(intern))
-        .join('')
+        .join("")
     );
 
-    return htmlArr.join('');
+    return htmlArr.join("");
+};
+
+module.exports = (team) => {
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Profiles Generator</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <header class="bg-danger py-4 mb-5">
+            <h1 class="text-center text-white">My Team</h1>
+        </header>
+        <main>
+            <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+            ${createCards(team)}
+            </div>
+            </div>
+        </main>
+    </body>
+</html>`;
 };
